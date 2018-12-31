@@ -3,9 +3,13 @@ package in.galaxyofandroid.spinerdialog;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -69,7 +73,15 @@ public class SpinnerDialog {
         title.setText(dTitle);
         final ListView listView = (ListView) v.findViewById(R.id.list);
         final EditText searchBox = (EditText) v.findViewById(R.id.searchBox);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.items_view, items);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.items_view, items) {
+            @NonNull
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                TextView v = (TextView) super.getView(position, convertView, parent);
+                v.setTextColor(Color.BLACK);
+                return v;
+            }
+        };
         listView.setAdapter(adapter);
         adb.setView(v);
         alertDialog = adb.create();
