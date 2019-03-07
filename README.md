@@ -15,7 +15,7 @@ Step 1. Add the JitPack repository to your build file
 Step 2. Add the dependency
 
 	dependencies {
-	        compile 'com.github.MdFarhanRaja:SearchableSpinner:1.9'
+	        compile 'com.github.MdFarhanRaja:SearchableSpinner:2.0'
 	}
   
 Step 3. Inside JAVA
@@ -45,6 +45,9 @@ Step 3. Inside JAVA
 
         spinnerDialog=new SpinnerDialog(MainActivity.this,items,"Select or Search City","Close Button Text");// With No Animation
 	spinnerDialog=new SpinnerDialog(MainActivity.this,items,"Select or Search City",R.style.DialogAnimations_SmileWindow,"Close Button Text");// With 	Animation
+	
+	spinnerDialog.setCancellable(true); // for cancellable
+	spinnerDialog.setShowKeyboard(false);// for open keyboard by default
 	
 	
         spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
