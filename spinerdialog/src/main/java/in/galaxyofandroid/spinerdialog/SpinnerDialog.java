@@ -29,6 +29,7 @@ public class SpinnerDialog {
     Activity context;
     String dTitle,closeTitle="Close";
     OnSpinerItemClick onSpinerItemClick;
+    OnSpinnerCloseClick onSpinerCloseClick;
     AlertDialog alertDialog;
     int pos;
     int style;
@@ -65,6 +66,10 @@ public class SpinnerDialog {
 
     public void bindOnSpinerListener(OnSpinerItemClick onSpinerItemClick1) {
         this.onSpinerItemClick = onSpinerItemClick1;
+    }
+
+    public void bindOnSpinerCloseListener(OnSpinnerCloseClick onSpinerCloseClick) {
+        this.onSpinerCloseClick = onSpinerCloseClick;
     }
 
     public void showSpinerDialog() {
@@ -129,6 +134,9 @@ public class SpinnerDialog {
             @Override
             public void onClick(View v) {
                 closeSpinerDialog();
+                if (onSpinerCloseClick != null) {
+                    onSpinerCloseClick.onClick();
+                }
             }
         });
         alertDialog.setCancelable(isCancellable());
