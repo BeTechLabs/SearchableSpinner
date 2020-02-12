@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/SearchableSpinner.iml" filepath="$PROJECT_DIR$/.idea/SearchableSpinner.iml" />
       <module fileurl="file://$PROJECT_DIR$/SearchableSpinner.iml" filepath="$PROJECT_DIR$/SearchableSpinner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SearchableSpinner-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SearchableSpinner-app.iml" group="SearchableSpinner/app" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/spinerdialog/spinerdialog.iml" filepath="$PROJECT_DIR$/spinerdialog/spinerdialog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/benchmark-SearchableSpinner.iml" filepath="$PROJECT_DIR$/.idea/modules/benchmark-SearchableSpinner.iml" group="SearchableSpinner" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spinerdialog/com.github.MdFarhanRaja-spinerdialog.iml" filepath="$PROJECT_DIR$/.idea/modules/spinerdialog/com.github.MdFarhanRaja-spinerdialog.iml" group="SearchableSpinner/spinerdialog" />
       <module fileurl="file://$PROJECT_DIR$/spinerdialog/spinerdialog.iml" filepath="$PROJECT_DIR$/spinerdialog/spinerdialog.iml" />
     </modules>
   </component>
