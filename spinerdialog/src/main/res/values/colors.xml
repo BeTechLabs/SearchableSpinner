@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#f7a386</color>
+    <color name="colorPrimaryDark">#ad6c61</color>
+    <color name="colorPrimaryDarker">#825046</color>
+    <color name="colorAccent">#5a6b84</color>
+    
+    
+    <color name="colorBackground">#1b1f28</color>
+    <color name="colorBackgroundTransparent">#CC1b1f28</color>
+    <color name="colorBackgroundLight">#22252d</color>
+    <color name="colorBackgroundLightTransparent">#E622252d</color>
+    <color name="colorBackgroundLighter">#272a35</color>
+    <color name="colorBackgroundLightest">#2e323d</color>
+    <color name="colorForeground">#FFFFFF</color>
+    <color name="colorForegroundDark">#5a6b84</color>
+    <color name="colorForegroundDarker">#343c51</color>
+
+    <color name="colorSuccess">#22b573</color>
+    <color name="colorSuccessFaded">#3a5440</color>
+
+    <color name="colorDanger">#c1272d</color>
+    <color name="colorDangerFaded">#543e3e</color>
+
+    <color name="colorWarning">#f77b14</color>
+
+    <color name="colorBlue">#29abe2</color>
+    <color name="colorBlueFaded">#394751</color>
+    <color name="colorBlueDarkFaded">#343c51</color>
+
+    <color name="colorYellow">#ffd700</color>
+
+    <color name="seperatorColor">#12ffffff</color>
+    <color name="colorQualityMeterEnd">#ff9f7f</color>
+    <color name="colorQualityMeterStart">#8a4d43</color>
+
+    <color name="colorWeakQualityMeter">#825046</color>
+    <color name="colorModerateQualityMeter">#ad6c61</color>
+    <color name="colorStrongQualityMeter">#f7a386</color>
+
+    <color name="colorConfirmLabel">#3a5440</color>
+    <color name="colorStatusLabel">#394751</color>
+    <color name="colorRedLabel">#543a3e</color>
+    <color name="colorUnconfirmedLabel">#343c51</color>
+    <color name="colorUnSelectedImpact">#546696</color>
+    
+    <color name="colorWorkplaceAddressText">#a2a3a4</color>
+    <color name="colorDisabled">#252528</color>
+
+</resources>

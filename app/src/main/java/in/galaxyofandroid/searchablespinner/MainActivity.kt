@@ -1,48 +1,80 @@
 package `in`.galaxyofandroid.searchablespinner
 
-import `in`.galaxyofandroid.spinerdialog.OnSpinerItemClick
 import `in`.galaxyofandroid.spinerdialog.SpinnerDialog
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.View
-import android.widget.TextView
 import android.widget.Toast
+import com.github.beTechLabs.spinnydialogapp.CustomModel
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    var items = ArrayList<String>()
-    lateinit var spinnerDialog: SpinnerDialog
+    lateinit var basicSpinnerDialog: SpinnerDialog<String>
+    lateinit var customSpinnyDialog: SpinnerDialog<CustomModel>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val selectedItems = findViewById<View>(R.id.txt) as TextView
-        items.add("Mumbai")
-        items.add("Delhi")
-        items.add("Bengaluru")
-        items.add("Hyderabad")
-        items.add("Ahmedabad")
-        items.add("Chennai")
-        items.add("Kolkata")
-        items.add("Surat")
-        items.add("Pune")
-        items.add("Jaipur")
-        items.add("Lucknow")
-        items.add("Kanpur")
-        spinnerDialog = SpinnerDialog(this@MainActivity, items,
-                "Select or Search City")
-        spinnerDialog.setCancellable(true)
-        spinnerDialog.setShowKeyboard(false)
-        spinnerDialog.bindOnSpinerListener(object : OnSpinerItemClick {
-            override fun onClick(item: String, position: Int) {
-                Toast.makeText(this@MainActivity, "$item  $position", Toast.LENGTH_SHORT).show()
-                selectedItems.text = "$item Position: $position"
-            }
-        })
-        findViewById<View>(R.id.show).setOnClickListener { spinnerDialog.showSpinerDialog() }
+        val items = ArrayList<String>()
+        items.add("Test")
+        items.add("Test1")
+        items.add("Test2")
+        items.add("Test3")
+        items.add("Test4")
+        items.add("Test5")
+        items.add("Test6")
+        items.add("Test7")
+        items.add("Test8")
+        items.add("Test9")
+        items.add("Test10")
+        items.add("Test11")
+        items.add("Test12")
+        items.add("Test13")
+
+        val customModels = mutableListOf<CustomModel>()
+        customModels.add(CustomModel("First", "Second"))
+        customModels.add(CustomModel("First1", "Second1"))
+        customModels.add(CustomModel("First2", "Second2"))
+        customModels.add(CustomModel("First3", "Second3"))
+        customModels.add(CustomModel("First4", "Second4"))
+        customModels.add(CustomModel("First5", "Second5"))
+        customSpinnyDialog = SpinnerDialog(
+                activity = this@MainActivity,
+                items = customModels,
+                adapter = DefaultRecyclerAdapter(customModels)
+                { item, position ->
+                    customSpinnyDialog.close()
+                    Toast.makeText(this@MainActivity, "$item  $position", Toast.LENGTH_SHORT).show()
+                    txt.text = "$item Position: $position"
+                }
+
+        )
+
+        customSpinnyDialog.isCancellable = true
+        customSpinnyDialog.isShowKeyboard = false
+        customSpinnyDialog.searchBoxGravity = SpinnerDialog.Gravity.Center
+        show_second.setOnClickListener { customSpinnyDialog.showSpinnyDialog() }
+        basicSpinnerDialog = SpinnerDialog(
+                activity = this@MainActivity,
+                items = items,
+                onItemClicked = { item, position ->
+                    basicSpinnerDialog.close()
+                    Toast.makeText(this@MainActivity, "$item  $position", Toast.LENGTH_SHORT).show()
+                    txt.text = "$item Position: $position"
+                }, onCreationRequested = {
+
+        }
+        )
+
+        basicSpinnerDialog.isCancellable = true
+        basicSpinnerDialog.isShowKeyboard = false
+        basicSpinnerDialog.searchBoxGravity = SpinnerDialog.Gravity.Center
+        show.setOnClickListener { basicSpinnerDialog.showSpinnyDialog() }
     }
+
 
     override fun onBackPressed() {
         super.onBackPressed()
-        spinnerDialog.closeSpinerDialog()
+        basicSpinnerDialog.close()
     }
 }
