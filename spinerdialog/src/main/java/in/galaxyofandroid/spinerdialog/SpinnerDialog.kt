@@ -7,6 +7,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.InsetDrawable
+import android.support.annotation.ColorInt
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
@@ -20,7 +21,6 @@ import android.widget.EditText
 import android.widget.TextView
 
 
-
 @Suppress("UNCHECKED_CAST")
 class SpinnerDialog<T>(
         private val activity: Activity,
@@ -28,12 +28,13 @@ class SpinnerDialog<T>(
         private val onItemClicked: ((String, Int) -> (Unit))? = null,
         private val onCreationRequested: (() -> Unit)? = null,
         private val adapter: SearchableRecyclerAdapter<T> = DefaultRecyclerAdapter(
-        items.toList() as List<String>,
-        onItemClicked
-    ) as SearchableRecyclerAdapter<T>,
+                items.toList() as List<String>,
+                onItemClicked
+        ) as SearchableRecyclerAdapter<T>,
         private val dialogTitle: String = "Title",
         private val style: Int = 0,
-        private val creationText: String = "Create new Item"
+        private val creationText: String = "Create new Item",
+        @ColorInt private val searchTextColor: Int = ContextCompat.getColor(activity, R.color.colorForeground)
 ) {
 
     var alertDialog: AlertDialog? = null
@@ -63,21 +64,21 @@ class SpinnerDialog<T>(
         }
         title.text = dialogTitle
         searchBox.gravity = searchBoxGravity.value
-
+        searchBox.setTextColor(searchTextColor)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                activity,
-                DividerItemDecoration.VERTICAL
-            ).apply {
-                setDrawable(
-                    ContextCompat.getDrawable(
+                DividerItemDecoration(
                         activity,
-                        R.drawable.item_recycler_separator
-                    )!!
-                )
-            }
+                        DividerItemDecoration.VERTICAL
+                ).apply {
+                    setDrawable(
+                            ContextCompat.getDrawable(
+                                    activity,
+                                    R.drawable.item_recycler_separator
+                            )!!
+                    )
+                }
         )
         adapter.resetItems()
         searchBox.addTextChangedListener(object : TextWatcher {
@@ -122,10 +123,10 @@ class SpinnerDialog<T>(
     private fun hideKeyboard() {
         try {
             val inputManager =
-                activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputManager.hideSoftInputFromWindow(
-                activity.currentFocus?.windowToken,
-                InputMethodManager.HIDE_NOT_ALWAYS
+                    activity.currentFocus?.windowToken,
+                    InputMethodManager.HIDE_NOT_ALWAYS
             )
         } catch (e: Exception) {
         }
@@ -135,10 +136,10 @@ class SpinnerDialog<T>(
         ettext.requestFocus()
         ettext.postDelayed({
             val keyboard =
-                activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             keyboard.showSoftInput(ettext, 0)
         }
-            , 200)
+                , 200)
     }
 
     enum class Gravity(val value: Int) {

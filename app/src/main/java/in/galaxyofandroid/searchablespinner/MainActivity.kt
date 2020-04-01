@@ -2,6 +2,7 @@ package `in`.galaxyofandroid.searchablespinner
 
 import `in`.galaxyofandroid.spinerdialog.SpinnerDialog
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.github.beTechLabs.spinnydialogapp.CustomModel
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         customSpinnyDialog = SpinnerDialog(
                 activity = this@MainActivity,
                 items = customModels,
+                searchTextColor = ContextCompat.getColor(this, R.color.colorAccent),
                 adapter = DefaultRecyclerAdapter(customModels)
                 { item, position ->
                     customSpinnyDialog.close()
@@ -50,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         )
 
-        customSpinnyDialog.isCancellable = true
+        customSpinnyDialog.isCancellable = false
         customSpinnyDialog.isShowKeyboard = false
         customSpinnyDialog.searchBoxGravity = SpinnerDialog.Gravity.Center
         show_second.setOnClickListener { customSpinnyDialog.showSpinnyDialog() }
