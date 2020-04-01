@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 internal class DefaultRecyclerAdapter(
-    private val _items: List<String>,
-    private val onItemClicked: ((String, Int) -> (Unit))?
+        private val _items: List<String>,
+        private val onItemClicked: ((String, Int) -> (Unit))?
 ) :
-    SearchableRecyclerAdapter<String>(_items.toMutableList()) {
+        SearchableRecyclerAdapter<String>(_items.toMutableList()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,6 +34,11 @@ internal class DefaultRecyclerAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as ViewHolder).bind(items[position])
-        holder.itemView.setOnClickListener { onItemClicked?.invoke(items[position], position) }
+        holder.itemView.setOnClickListener {
+            onItemClicked?.invoke(items[position],
+                    _items.indexOfFirst { it == items[position] }
+            )
+
+        }
     }
 }
