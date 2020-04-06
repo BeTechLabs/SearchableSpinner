@@ -1,6 +1,5 @@
 package `in`.galaxyofandroid.spinerdialog
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.app.AlertDialog.Builder
 import android.content.Context
@@ -14,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
@@ -23,7 +23,7 @@ import android.widget.TextView
 
 @Suppress("UNCHECKED_CAST")
 class SpinnerDialog<T>(
-        private val activity: Activity,
+        private val context: Context,
         private val items: List<T>,
         private val onItemClicked: ((String, Int) -> (Unit))? = null,
         private val onCreationRequested: (() -> Unit)? = null,
@@ -34,7 +34,7 @@ class SpinnerDialog<T>(
         private val dialogTitle: String = "Title",
         private val style: Int = 0,
         private val creationText: String = "Create new Item",
-        @ColorInt private val searchTextColor: Int = ContextCompat.getColor(activity, R.color.colorForeground)
+        @ColorInt private val searchTextColor: Int = ContextCompat.getColor(context, R.color.colorForeground)
 ) {
 
     var alertDialog: AlertDialog? = null
@@ -45,8 +45,8 @@ class SpinnerDialog<T>(
 
     fun showSpinnyDialog() {
 
-        val alertDialogBuilder = Builder(activity)
-        val inflatedView = activity.layoutInflater.inflate(R.layout.dialog_layout, null)
+        val alertDialogBuilder = Builder(context)
+        val inflatedView = LayoutInflater.from(context).inflate(R.layout.dialog_layout, null)
 
 
         alertDialogBuilder.setView(inflatedView)
@@ -66,15 +66,15 @@ class SpinnerDialog<T>(
         searchBox.gravity = searchBoxGravity.value
         searchBox.setTextColor(searchTextColor)
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.addItemDecoration(
                 DividerItemDecoration(
-                        activity,
+                        context,
                         DividerItemDecoration.VERTICAL
                 ).apply {
                     setDrawable(
                             ContextCompat.getDrawable(
-                                    activity,
+                                    context,
                                     R.drawable.item_recycler_separator
                             )!!
                     )
@@ -123,9 +123,9 @@ class SpinnerDialog<T>(
     private fun hideKeyboard() {
         try {
             val inputManager =
-                    activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputManager.hideSoftInputFromWindow(
-                    activity.currentFocus?.windowToken,
+                    LayoutInflater.from(context).inflate(R.layout.dialog_layout, null).windowToken,
                     InputMethodManager.HIDE_NOT_ALWAYS
             )
         } catch (e: Exception) {
@@ -136,7 +136,7 @@ class SpinnerDialog<T>(
         ettext.requestFocus()
         ettext.postDelayed({
             val keyboard =
-                    activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             keyboard.showSoftInput(ettext, 0)
         }
                 , 200)
